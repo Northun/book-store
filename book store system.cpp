@@ -108,6 +108,28 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   //my code; try to make a window to show book info
+   HWND bookBox = CreateWindowW(
+           L"BUTTON",
+           L"Book Info",
+           WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+           10,10,300,120,
+           hWnd,
+            (HMENU)1001,
+               hInst,
+               nullptr
+
+   );
+
+   if (!bookBox)
+   {
+       return FALSE;
+   }
+
+   ShowWindow(bookBox, nCmdShow);
+   UpdateWindow(bookBox);
+
+   //my code end
    return TRUE;
 }
 
