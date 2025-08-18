@@ -27,14 +27,26 @@
     <ClInclude Include="book store system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="book.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="book store system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="book.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="book store system.rc">
+    <ResourceCompile Include="book_store_system.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>

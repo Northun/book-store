@@ -24,6 +24,7 @@
     <ProjectGuid>{c12efcf7-2dce-4335-8209-9023390b9654}</ProjectGuid>
     <RootNamespace>bookstoresystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>book store system</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -124,15 +125,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="book store system.h" />
+    <ClInclude Include="book.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="helper.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="book store system.cpp" />
+    <ClCompile Include="book.cpp" />
+    <ClCompile Include="helper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="book store system.rc" />
+    <ResourceCompile Include="book_store_system.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="book store system.ico" />

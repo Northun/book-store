@@ -1,12 +1,20 @@
 #include "book.h"
 
 
-void Book::sell(int sellNum = 1) {
+void Book::sell(int sellNum) {
 	this->amount = this->amount - sellNum;
 }
 
 void Book::purchase(int purchaseNum) {
 	this->amount = this->amount + purchaseNum;
+}
+
+void Book::setPrice(double newPrice) {
+	this->price = newPrice;
+}
+
+double Book::getPrice() {
+	return this->price;
 }
 
 void Book::updatePopularity() {

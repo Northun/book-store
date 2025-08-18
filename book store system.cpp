@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "book store system.h"
 
+
 #define MAX_LOADSTRING 100
 
 // Global Variables:
@@ -16,6 +17,9 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    AddBookDlgProc(HWND, UINT, WPARAM, LPARAM);
+
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -98,7 +102,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Store instance handle in our global variable
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, 
+       LoadMenu(hInstance, MAKEINTRESOURCE(IDR_MENU1)),
+       hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -153,6 +159,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // Parse the menu selections:
             switch (wmId)
             {
+            case ID_BOOK_ADDBOOK:
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_ADDBOOKDIALOG1), hWnd, AddBookDlgProc);
+                break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
                 break;
@@ -199,4 +208,41 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
+}
+
+//add book dialog handler
+INT_PTR CALLBACK AddBookDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message) 
+    {
+    case WM_COMMAND:
+        switch (LOWORD(wParam)) 
+        {
+        case IDC_BOOKADDBTN1:
+        {
+            //std::cout << "start add book";
+            //extract info from user input
+            int len_title = GetWindowTextLength(GetDlgItem(hDlg, IDC_TITLEDIT1));
+            int len_abstract = GetWindowTextLength(GetDlgItem(hDlg, IDC_TITLEDIT1));
+            
+            std::wstring title(len_title, L'\0'), abstract(len_abstract, '\0');
+
+            GetDlgItemTextW(hDlg, IDC_TITLEDIT1, &title[0], len_title + 1);
+            GetDlgItemTextW(hDlg, IDC_ABSTRACTEDIT2, &abstract[0], len_abstract + 1);
+
+            //handle number input
+            
+
+            MessageBoxW(NULL, title.c_str(), L"Add ", MB_OK);
+            //std::cout << "add a book!";
+            EndDialog(hDlg, IDC_BOOKADDBTN1);
+            return TRUE;
+        }
+        case IDBOOKCANCEL:
+            EndDialog(hDlg, IDBOOKCANCEL);
+            return TRUE;
+        }
+        break;
+    }
+    return FALSE;
 }

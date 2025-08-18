@@ -9,9 +9,9 @@ public:
 	int bookId;
 	std::string title;
 	std::string abstract;
-	float price;
+	double price;
 	unsigned int amount;
-	int popularity;
+	
 
 	void sell(int sellNum = 1);
 
@@ -19,11 +19,12 @@ public:
 	
 	void updateAbstract(std::string newAbstract);
 
-	void setPrice(float newPrice);
-	float getPrice();
+	void setPrice(double newPrice);
+	double getPrice();
 
 private:
 	int soldNum;
+	int popularity;
 	void updatePopularity();
 
 
