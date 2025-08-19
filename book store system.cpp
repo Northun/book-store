@@ -231,9 +231,19 @@ INT_PTR CALLBACK AddBookDlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM l
             GetDlgItemTextW(hDlg, IDC_ABSTRACTEDIT2, &abstract[0], len_abstract + 1);
 
             //handle number input
-            
+            bool successAmount = false;
+            unsigned int amount = GetDlgItemUInt(hDlg, IDC_AMOUNTEDIT3, successAmount);
+            bool successPrice = false;
+            double price = GetDlgItemDouble(hDlg, IDC_PRICEEDIT4, successPrice);
 
-            MessageBoxW(NULL, title.c_str(), L"Add ", MB_OK);
+            std::wstring amountText = std::to_wstring(amount);
+            std::wstring priceText = std::to_wstring(price);
+
+            std::wstring message = title + L"\n" + abstract + L"\n" + amountText + L"\n" + priceText;
+
+            Book newBook(title, abstract, amount, price);
+
+            MessageBoxW(NULL, message.c_str(), L"Add ", MB_OK);
             //std::cout << "add a book!";
             EndDialog(hDlg, IDC_BOOKADDBTN1);
             return TRUE;
