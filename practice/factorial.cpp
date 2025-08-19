@@ -19,6 +19,31 @@ constexpr auto factorial() {
     }
 }
 
+
+//two sum
+vector<int> twoSum(vector<int>& nums, int target) {
+    vector<int> twoIndice {};
+
+    //make a hashmap to store the number and index we need
+    unordered_map<int, int> numIndexPair;
+
+    for (int i=0; i < nums.size(); i++){
+        int wanted = target - nums[i];
+
+        if (numIndexPair.find(wanted) != numIndexPair.end()){
+            twoIndice.push_back(i);
+            twoIndice.push_back(numIndexPair[wanted]);
+            return twoIndice;
+        }
+
+        numIndexPair[nums[i]] = i;
+
+
+    }
+
+    return twoIndice;
+}
+
 int main()
 {
     std::cout << "Hello World!\n";
@@ -40,3 +65,4 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
