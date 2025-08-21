@@ -117,6 +117,72 @@ ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
     return result;
 }
 
+//valid parentheses
+bool isValid(string s) {
+    
+    std::unordered_map<char, char> match = {
+        {')','('},
+        {'}','{'},
+        {']','['}
+    } ;
+    //store missing closing elements
+    stack<char> missing;
+
+    for(char c : s){
+        auto it = match.find(c);
+        if (it != match.end()){
+            if(missing.empty() || missing.top() != match[c]){
+                return false;
+            }
+            missing.pop();
+        }else {
+            missing.push(c);
+        }
+    }
+
+    return missing.empty();
+}
+
+//median of two sorted list
+
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+    int totalSize = nums1.size() + nums2.size();
+
+    // go through all numbers
+    int index1 = 0;
+    int index2 = 0;
+    vector<int> merge;
+
+    //merge first
+    for (int i=0;i<totalSize;i++){
+        if ((index1 < nums1.size()) && (index2 < nums2.size())){
+            if(nums1[index1] < nums2[index2]){
+                merge.push_back(nums1[index1]);
+                index1 = index1 + 1;
+                
+            }else{
+                merge.push_back(nums2[index2]);
+                index2 = index2 + 1;
+            }
+        }
+        else if(index1 < nums1.size()){
+            merge.push_back(nums1[index1]);
+            index1 = index1 + 1;
+        }
+        else{
+            merge.push_back(nums2[index2]);
+            index2 = index2 + 1;
+        }
+    }
+
+    if (totalSize%2 != 0){
+        return static_cast<double>(merge[totalSize/2]);
+    }
+    else{
+        return static_cast<double>((merge[totalSize/2-1]+merge[totalSize/2])/2.0);
+    }
+    
+}
 
 
 
@@ -141,5 +207,6 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
 
 
