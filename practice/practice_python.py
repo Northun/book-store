@@ -52,4 +52,50 @@ def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) ->
             list1 = list1.next
         tail = tail.next
     tail.next = list1 if list1 else list2
+
     return dummyHead.next
+
+# match parentheses
+
+def isValid(self, s: str) -> bool:
+    match = {'}':'{', ']':'[', ')':'('}
+
+    missing = []
+
+    for c in s:
+        if c in match.values():
+            missing.append(c)
+        elif c in match:
+            if not missing or match[c] != missing.pop():
+                return False
+    return not missing
+
+# find the median of two sorted list
+
+def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    i1 = i2 = 0
+    len1 = len(nums1)
+    len2 = len(nums2)
+    totalNum = len1 + len2
+
+    merge = []
+    #merge two list
+    for i in range(totalNum):
+        if i1 < len1 and i2 <len2:
+            if nums1[i1] < nums2[i2]:
+                merge.append(nums1[i1])
+                i1 = i1 + 1
+            else:
+                merge.append(nums2[i2])
+                i2 = i2 + 1
+        elif i1 < len1:
+            merge.append(nums1[i1])
+            i1 = i1 + 1
+        else:
+            merge.append(nums2[i2])
+            i2 = i2 + 1
+        
+    if totalNum%2 != 0:
+        return float(merge[totalNum//2])
+    else:
+        return float((merge[totalNum//2-1]+merge[totalNum//2])/2.0)
