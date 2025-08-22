@@ -99,3 +99,21 @@ def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         return float(merge[totalNum//2])
     else:
         return float((merge[totalNum//2-1]+merge[totalNum//2])/2.0)
+
+# Longest Substring Without Repeating Characters
+def lengthOfLongestSubstring(self, s: str) -> int:
+    longest = 0
+    left = 0
+    lenS = len(s)
+    charIndex = {}
+
+    for right in range(lenS):
+        if( (s[right] not in charIndex) or (charIndex[s[right]] < left)):
+            charIndex[s[right]] = right
+            longest = max(longest, right - left +1)
+        else:
+            left = charIndex[s[right]] + 1
+            charIndex[s[right]] = right
+            
+    
+    return longest
