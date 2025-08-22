@@ -184,7 +184,27 @@ double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
     
 }
 
+//Longest Substring Without Repeating Characters
+int lengthOfLongestSubstring(string s) {
+    string subS {};
+    int n = s.length();
+    unordered_map<char, int> subIndex {};
+    int longest = {0};
+    int left = {0};
 
+    for (int right = 0; right < n; right++){
+        if (subIndex.count(s[right]) == 0 || subIndex[s[right]] < left ){
+            subIndex[s[right]] = right;
+            longest = max(longest, right - left +1);
+        }else{
+            left = subIndex[s[right]] +1;
+            subIndex[s[right]] = right;
+        }
+    }
+    return longest;
+
+   
+}
 
 int main()
 {
@@ -207,6 +227,7 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
 
 
 
