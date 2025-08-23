@@ -206,6 +206,54 @@ int lengthOfLongestSubstring(string s) {
    
 }
 
+//String to Integer (atoi)
+int myAtoi(string s) {
+    vector<int> readIn = {};
+    int sign = 1;//default is +
+    bool validIn = false;
+
+    int lenS = s.length();
+    int i = {0};
+
+    //remove leading empty space
+    while(i < lenS && s[i] == ' '){
+        i++;
+    }
+
+    if (i == lenS){
+        return 0;
+    }
+
+    if(s[i] == '+'){
+        i++;
+        sign = 1;
+    }else if(s[i] == '-'){
+        i++;
+        sign = -1;
+    }
+    long long num = 0;
+    const long long MAXNUM = INT_MAX;
+    const long long MINNUM = INT_MIN;
+    while(isdigit(s[i]) && (i < lenS)){
+        int digit = s[i] - '0';
+        num = num*10 + digit;
+
+        if(sign*num > MAXNUM){
+            return MAXNUM;
+        }
+
+        if(sign*num < MINNUM){
+            return MINNUM;
+        }
+
+        i++;
+    }
+
+    return static_cast<int>(sign*num);
+
+
+}
+
 int main()
 {
     std::cout << "Hello World!\n";
@@ -227,6 +275,7 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
 
 
 
