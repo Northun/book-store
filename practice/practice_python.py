@@ -117,3 +117,11 @@ def lengthOfLongestSubstring(self, s: str) -> int:
             
     
     return longest
+
+
+        if num*sign < minN:
+            return minN
+        
+        i = i+1
+
+    return num*sign        
