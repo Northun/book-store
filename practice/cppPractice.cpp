@@ -254,6 +254,31 @@ int myAtoi(string s) {
 
 }
 
+// You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+//Find two lines that together with the x-axis form a container, such that the container contains the most water.
+int maxArea(vector<int>& height) {
+    int left {0};
+    int lenList = height.size()-1;
+    int right {lenList};
+
+    int container = min(height[left], height[right]) * lenList;
+
+    while(left < right){
+        int area = min(height[left], height[right]) * (right - left);
+        container = max(container, area);
+
+        if (height[left] < height[right]){
+            left = left + 1;
+        }else{
+            right = right - 1;
+        }
+
+    }
+    return container;
+
+}
+
 int main()
 {
     std::cout << "Hello World!\n";
@@ -275,6 +300,7 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
 
 
 
