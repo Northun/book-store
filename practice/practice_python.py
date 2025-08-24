@@ -125,3 +125,22 @@ def lengthOfLongestSubstring(self, s: str) -> int:
         i = i+1
 
     return num*sign        
+
+# You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+# Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+def maxArea(self, height: List[int]) -> int:
+    left = 0
+    right = len(height) - 1
+    container = 0
+    while left < right:
+        area = min(height[left], height[right])*(right - left)
+        container = max(container, area)
+
+        if height[left] < height[right]:
+            left = left + 1
+        else:
+            right = right - 1
+    
+    return container
