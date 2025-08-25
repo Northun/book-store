@@ -279,6 +279,52 @@ int maxArea(vector<int>& height) {
 
 }
 
+
+//Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+
+//Notice that the solution set must not contain duplicate triplets.
+
+
+vector<vector<int>> threeSum(vector<int>& nums) {
+    //make a sum to index table
+    unordered_map<int, int> numTable {};
+
+    vector<vector<int>> triplets {};
+
+    int lenS = nums.size();
+    //sort nums to make avoiding duplicate easily
+    sort(nums.begin(), nums.end());
+
+    for (int i=0; i < lenS; i++){
+        if (i >0 && nums[i-1] == nums[i]){
+            continue;
+        }
+
+        int left = i+1;
+        int right = lenS-1;
+        while(left < right){
+            int sum = nums[i] + nums[left] + nums[right];
+            if(sum == 0){
+                triplets.push_back({nums[i], nums[left], nums[right]});
+                //move left or right, and avoid duplicate
+                while(left < right && nums[left] == nums[left+1]) left++;
+                while(left < right && nums[right] == nums[right-1]) right--;
+                left++;
+                right--;
+            }else if (sum < 0){
+                left++;}
+            else{
+                right--;}
+
+            
+        }
+        
+    }
+
+    return triplets;
+}
+
+
 int main()
 {
     std::cout << "Hello World!\n";
@@ -300,6 +346,7 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
 
 
 
