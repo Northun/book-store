@@ -179,3 +179,37 @@ def threeSum(self, nums: List[int]) -> List[List[int]]:
                 right-= 1
     
     return triplets
+
+#Longest Palindromic Substring
+
+def longestPalindrome(self, s: str) -> str:
+    longest = s[0]
+
+    lenS = len(s)
+
+    def searchPalin(left,right):
+        while(left >= 0 and right < lenS):
+            if (s[left] == s[right]):
+                left -= 1
+                right += 1
+            else:
+                break
+        
+        return s[left+1:right]
+
+
+
+    for i in range(lenS-1):
+        # search palindrome using each i as a center
+        oddP = searchPalin(i-1,i+1)
+        evenP = searchPalin(i, i+1)
+
+        if len(oddP) > len(longest):
+            longest = oddP
+        
+        if len(evenP) > len(longest):
+            longest = evenP
+
+
+
+    return longest
