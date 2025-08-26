@@ -324,6 +324,52 @@ vector<vector<int>> threeSum(vector<int>& nums) {
     return triplets;
 }
 
+//  Longest Palindromic Substring
+
+string longestPalindrome(string s) {
+
+    //special case if s is empty or one char
+    if(s.size() <= 1){
+        return s;
+    }
+
+    string_view sv = s;
+    string_view longest = sv.substr(0,1);
+
+    int lenS = sv.size();
+
+    auto searchPalin = [&](int left, int right){
+        while(left >= 0 && right <= lenS-1){
+            if(sv[left] == sv[right]){
+                left--;
+                right++;
+            }else{
+                break;
+            }
+        }
+
+        return sv.substr(left+1, right-left-1);
+    };
+
+
+    
+    for (int i =0; i< lenS; i++){
+        string_view oddP = searchPalin(i-1, i+1);
+        string_view evenP = searchPalin(i, i+1);
+
+        if (oddP.size() > longest.size()){
+            longest = oddP;
+        }
+
+        if (evenP.size() > longest.size()){
+            longest = evenP;
+        }
+
+    }
+
+    return std::string(longest);
+
+}
 
 int main()
 {
@@ -346,6 +392,7 @@ int main()
 //   4. Use the Error List window to view errors
 //   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
 //   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+
 
 
 
