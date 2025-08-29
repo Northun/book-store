@@ -60,3 +60,57 @@ def reverse(self, x: int) -> int:
         x = x // 10 if x >0 else -(abs(x)//10)
 
     return result
+
+
+#Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums
+
+#Input: nums = [1,1,2]
+#Output: 2, nums = [1,2,_]
+
+# use two pointer approach
+
+def removeDuplicates(self, nums: List[int]) -> int:
+    lenS = len(nums)
+
+    j = 1
+    for i in range(1,lenS):
+        if nums[i] != nums[i-1]:
+            nums[j] = nums[i]
+            j = j+1
+        
+    return j
+
+# Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
+
+def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    if (not head or not (head.next)):
+        return head
+    
+
+    
+    cur = head
+    pre = cur
+
+    next = cur.next
+    head = next
+
+    nextNext = cur.next.next
+    next.next = cur
+    cur.next = nextNext
+    cur = nextNext
+
+
+    while (cur and cur.next):
+        next = cur.next
+        nextNext = cur.next.next
+
+        pre.next = next
+        next.next = cur
+        pre = cur
+        cur.next = nextNext
+
+        cur = nextNext
+
+    
+
+    return head
