@@ -66,3 +66,59 @@
       return result;
       
   }
+//Input: nums = [1,1,2]
+//Output: 2, nums = [1,2,_]
+  int removeDuplicates(vector<int>& nums) {
+       
+      int lenS = nums.size();
+
+      int j = 1;
+      for (int i=1; i < lenS;i++){
+          if (nums[i] != nums[i-1]){
+              nums[j] = nums[i];
+              j = j+1;
+          }
+      }
+      return j;
+  }
+
+
+
+
+//Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list's nodes (i.e., only nodes themselves may be changed.)
+
+ListNode* swapPairs(ListNode* head) {
+    if (!head || !(head->next)) {
+        return head;
+    }
+
+    
+
+  
+    ListNode* cur = head;
+    ListNode* pre = cur;
+
+    ListNode* next = cur->next;
+    head = next;
+
+    ListNode* nextNext = cur->next->next;
+    next->next = cur;
+    cur->next = nextNext;
+    cur = nextNext;
+
+
+    while (cur && cur->next){
+        ListNode* next = cur->next;
+        ListNode* nextNext = cur->next->next;
+
+        pre->next = next;
+        next->next = cur;
+        pre = cur;
+        cur->next = nextNext;
+
+        cur = nextNext;
+
+    }
+
+    return head;
+}
