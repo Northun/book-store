@@ -122,3 +122,55 @@ ListNode* swapPairs(ListNode* head) {
 
     return head;
 }
+
+//Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
+
+//The integer division should truncate toward zero, which means losing its fractional part. For example, 8.345 would be truncated to 8, and -2.7335 would be truncated to -2.
+
+//Return the quotient after dividing dividend by divisor.
+
+int divide(int dividend, int divisor) {
+        int32_t Imax = int32_t((1u << 31) - 1);
+        int32_t Imin = -(1u << 31);
+
+        int sign = 1;
+        if ((dividend < 0) ^ (divisor < 0)) {
+            sign = -1;}
+
+        
+        if (dividend == Imin && divisor == -1)
+            return Imax;
+        
+        if (divisor  == -1)
+            return -dividend;
+            
+        if (divisor == 1)
+            return dividend;
+        
+        if (dividend == 0)
+            return 0;
+
+        //convert to negative number to prevent overflow
+        int negDividend =  dividend < 0 ? dividend : -dividend;
+        int negDivisor = divisor < 0 ? divisor : -divisor;
+        
+        if (negDividend > negDivisor)
+            return 0;
+
+        int quotient = 0;
+        //left shift a neg number will double it as long as no overflow
+        while (negDividend <= negDivisor){
+            int shift = 0;
+            int shiftDivisor = negDivisor;
+            // be careful, we should check overflow before we do the shift, since overflow is undefined
+            while (shiftDivisor >= (Imin >>1) && negDividend <= (shiftDivisor<<1)){
+                shiftDivisor = shiftDivisor << 1;
+                // if we get positive number after shift, that means we overflow
+            }
+            // after the while loop, we actually shift one more than necessary
+            negDividend = negDividend - (negDivisor << (shift));
+            quotient = (1 << (shift)) + quotient;
+        
+        }
+        return sign > 0 ? quotient : -quotient;
+}
