@@ -213,3 +213,55 @@ def longestPalindrome(self, s: str) -> str:
 
 
     return longest
+
+#Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.
+
+#The integer division should truncate toward zero, which means losing its fractional part. For example, 8.345 would be truncated to 8, and -2.7335 would be truncated to -2.
+
+#Return the quotient after dividing dividend by divisor.
+
+def divide(self, dividend: int, divisor: int) -> int:
+        Imax = (1 << 31) - 1
+        Imin = -(1 << 31)
+
+        sign = 1
+        if ((dividend < 0) ^ (divisor < 0)) :
+            sign = -1
+
+        
+        if dividend == Imin and divisor == -1:
+            return Imax
+        
+        if divisor  == -1:
+            return -dividend
+            
+        if divisor == 1:
+            return dividend
+        
+        if dividend == 0:
+            return 0
+
+        #convert to negative number to prevent overflow
+        negDividend = dividend if dividend < 0 else -dividend
+        negDivisor = divisor if divisor < 0 else -divisor
+        
+        if negDividend > negDivisor:
+            return 0
+
+        quotient = 0
+        #left shift a neg number will double it as long as no overflow
+        while negDividend <= negDivisor:
+            shift = 0
+            shiftDivisor = negDivisor
+            while shiftDivisor >= negDividend:
+                shiftDivisor = shiftDivisor << 1
+                # if we get positive number after shift, that means we overflow
+                if shiftDivisor > 0:
+                    break
+                shift = shift + 1
+            # after the while loop, we actually shift one more than necessary
+            negDividend = negDividend - (negDivisor << (shift-1))
+            quotient = (1 << (shift-1)) + quotient
+        
+        
+        return quotient if sign > 0 else -quotient
