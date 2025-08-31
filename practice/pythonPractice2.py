@@ -114,3 +114,31 @@ def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
     
 
     return head
+
+
+#Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.
+
+#Return the sum of the three integers.
+
+def threeSumClosest(self, nums: List[int], target: int) -> int:
+    # sort the array 
+    nums.sort()
+
+    # go through all the elements, and use two pointer method to find closest combination
+    lenS = len(nums)
+    closeTotal = nums[0] + nums[1] + nums[lenS-1]
+    for i in range(lenS):
+        left = i+1
+        right = lenS-1
+        while left < right:
+            total = nums[i] + nums[left] +nums[right]
+            if abs(total-target) < abs(closeTotal - target):
+                if abs(total - target) == 0:
+                    return total
+                closeTotal = total
+            if total < target:
+                left += 1
+            else:
+                right -= 1
+    
+    return closeTotal
