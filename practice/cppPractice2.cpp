@@ -174,3 +174,34 @@ int divide(int dividend, int divisor) {
         }
         return sign > 0 ? quotient : -quotient;
 }
+
+
+
+//Given an integer array nums of length n and an integer target, find three integers in nums such that the sum is closest to target.
+
+//Return the sum of the three integers.
+int threeSumClosest(vector<int>& nums, int target) {
+    sort(nums.begin(), nums.end());
+
+    // go through all the elements, and use two pointer method to find closest combination
+    int lenS = nums.size();
+    int closeTotal = nums[0] + nums[1] + nums[lenS-1];
+    for (int i=0; i < lenS; i++){
+        int left = i+1;
+        int right = lenS-1;
+        while (left < right){
+            int total = nums[i] + nums[left] +nums[right];
+            if (abs(total-target) < abs(closeTotal - target)){
+                if (abs(total - target) == 0)
+                    return total;
+                closeTotal = total;
+            }
+            if (total < target){
+                left++;}
+            else
+                right--;
+        }
+    }
+    return closeTotal;
+
+}
