@@ -142,3 +142,21 @@ def threeSumClosest(self, nums: List[int], target: int) -> int:
                 right -= 1
     
     return closeTotal
+
+
+# Given an integer x, return true if x is a palindrome, and false otherwise.
+
+def isPalindrome(self, x: int) -> bool:
+    if x < 0:
+        return False
+
+    xCopy = x
+    
+    reverse = 0
+    while xCopy > 0:
+        reverse = reverse*10 + xCopy%10
+        xCopy = xCopy//10
+        
+    #reverse = reverse*10 + xCopy//10
+
+    return reverse == x
