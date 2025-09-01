@@ -205,3 +205,27 @@ int threeSumClosest(vector<int>& nums, int target) {
     return closeTotal;
 
 }
+
+
+//Given an integer x, return true if x is a palindrome, and false otherwise.
+bool isPalindrome(int x) {
+    if (x < 0)
+        return false;
+
+    int xCopy = x;
+    
+    int reverse = 0;
+
+    int overflowBar = INT_MAX / 10;
+    while (xCopy > 0){
+        
+        reverse = reverse*10 + xCopy%10;
+        
+        xCopy = xCopy/10;
+        if (reverse > overflowBar)
+            break;
+    }
+
+
+    return reverse == x;
+}
