@@ -229,3 +229,45 @@ bool isPalindrome(int x) {
 
     return reverse == x;
 }
+
+// Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+
+vector<string> letterCombinations(string digits) {
+
+    vector<string> result;
+    if (digits.size() == 0)
+        return result;
+
+    unordered_map<char, string> digitMap = {
+        {'2',"abc"},
+        {'3',"def"},
+        {'4', "ghi"},
+        {'5', "jkl"},
+        {'6', "mno"},
+        {'7', "pqrs"},
+        {'8', "tuv"},
+        {'9', "wxyz"},
+    };
+
+    int idxMax = digits.size();
+
+    combine(result, digits, idxMax, 0, digitMap, "");
+
+    return result;
+
+    
+}
+
+
+void combine(vector<string>& result, const string& digits, int idxMax, int idx, const unordered_map<char, string>& digitMap, string combination){
+    if (idx == idxMax){
+        result.push_back(combination);
+        // we don't return value since we modify result already
+        return;
+    }
+    
+    string letters = digitMap.at(digits[idx]);
+    for (char ch : letters){
+        combine(result, digits, idxMax, idx+1, digitMap, combination + ch);
+    }
+}
