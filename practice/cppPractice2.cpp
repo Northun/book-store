@@ -271,3 +271,27 @@ void combine(vector<string>& result, const string& digits, int idxMax, int idx, 
         combine(result, digits, idxMax, idx+1, digitMap, combination + ch);
     }
 }
+
+
+//Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+vector<string> generateParenthesis(int n) {
+    vector<string> result;
+
+
+    addP(result, 0, 0, n, "");
+
+    return result;
+}
+
+void addP(vector<string>& result, int openP, int closeP,int numP, string s){
+    if (openP == closeP && openP == numP){
+        result.push_back(s);
+        return;
+    }
+
+    if (openP < numP)
+        addP(result, openP+1, closeP, numP, s+"(");
+
+    if (closeP < openP)
+        addP(result, openP, closeP+1, numP, s+")");
+}
