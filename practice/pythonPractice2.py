@@ -193,3 +193,25 @@ def letterCombinations(self, digits: str) -> List[str]:
     combine(0,"")
 
     return result
+
+# Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+def generateParenthesis(self, n: int) -> List[str]:
+
+    result = []
+    
+    #recursive approach
+    def addP(openP, closeP, s):
+        if openP == closeP and openP == n:
+            result.append(s)
+            return 
+        
+        if openP < n:
+            addP(openP+1, closeP, s+"(")
+        
+        if closeP < openP:
+            addP(openP, closeP+1, s+")")
+
+    addP(0,0,"")
+
+    return result
