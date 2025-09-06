@@ -295,3 +295,23 @@ void addP(vector<string>& result, int openP, int closeP,int numP, string s){
     if (closeP < openP)
         addP(result, openP, closeP+1, numP, s+")");
 }
+
+
+// Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+vector<vector<int>> permute(vector<int>& nums) {
+    vector<vector<int>> result;
+    perm(nums, 0, result);
+    return result;
+}
+
+void perm(vector<int>& nums, int start, vector<vector<int>>& result) {
+    if (start == nums.size()) {
+        result.push_back(nums);  
+        return;
+    }
+    for (int i = start; i < nums.size(); ++i) {
+        swap(nums[start], nums[i]);       
+        perm(nums, start + 1, result);   
+        swap(nums[start], nums[i]);      
+    }
+}
