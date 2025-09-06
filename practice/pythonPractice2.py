@@ -215,3 +215,25 @@ def generateParenthesis(self, n: int) -> List[str]:
     addP(0,0,"")
 
     return result
+
+# Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.
+def permute(self, nums: List[int]) -> List[List[int]]:
+    lenS = len(nums)
+
+    result = []
+
+    # using swap to do in site permutation
+    def perm(startP):
+        if startP == lenS:
+            result.append(nums[:])
+            return
+        
+        for i in range(startP, lenS):
+            nums[i], nums[startP] = nums[startP], nums[i]
+            perm(startP+1)
+            nums[i], nums[startP] = nums[startP], nums[i]
+
+    
+    perm(0)
+    
+    return result
