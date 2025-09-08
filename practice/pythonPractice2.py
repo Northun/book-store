@@ -237,3 +237,38 @@ def permute(self, nums: List[int]) -> List[List[int]]:
     perm(0)
     
     return result
+
+
+# Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
+int search(vector<int>& nums, int target) {
+    int left = 0;
+    //int lenS = len(nums)
+    int right = nums.size() - 1;
+
+    //int leftnum = nums[0];
+    //int rightnum = nums[-1];
+
+    while (left <= right){
+        int mid = (left + right) / 2;
+
+        if (nums[mid] == target)
+            return mid;
+
+        if (nums[left] <= nums[mid]){
+            //left side is sorted
+            if (nums[left] <= target && target < nums[mid])
+                right = mid - 1;
+            else
+                left = mid + 1;
+        }
+
+        else{
+            if (nums[mid] < target && target <= nums[right])
+                left = mid + 1;
+            else
+                right = mid - 1;
+        }
+    }
+    return -1;
+}
+
