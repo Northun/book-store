@@ -272,3 +272,32 @@ int search(vector<int>& nums, int target) {
     return -1;
 }
 
+#The next permutation of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).
+
+#For example, the next permutation of arr = [1,2,3] is [1,3,2].
+
+def nextPermutation(self, nums: List[int]) -> None:
+    """
+    Do not return anything, modify nums in-place instead.
+    """
+    lenS = len(nums)
+
+    canUp = lenS - 1
+
+    while canUp > 0 and nums[canUp-1] >= nums[canUp]:
+        canUp -= 1
+
+    # it is already the biggest permutation
+    if canUp == 0:
+        nums.reverse()
+        return
+
+    # find the smallest bigger number on the right of canUp, and swap with it
+    smallest = lenS - 1
+
+    while smallest > canUp and nums[smallest] <= nums[canUp-1]:
+        smallest -= 1
+
+    nums[canUp-1], nums[smallest] = nums[smallest], nums[canUp-1]
+
+    nums[canUp:] = reversed(nums[canUp:])
