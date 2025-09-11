@@ -345,3 +345,32 @@ void perm(vector<int>& nums, int start, vector<vector<int>>& result) {
                     right = mid - 1
         
         return -1
+
+      //The next permutation of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the next permutation of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).
+
+//For example, the next permutation of arr = [1,2,3] is [1,3,2].
+
+void nextPermutation(vector<int>& nums) {
+    int lenS = nums.size();
+
+    int canUp = lenS - 1;
+
+    while (canUp > 0 && nums[canUp-1] >= nums[canUp]){
+        canUp--;
+    }
+    // it is already the biggest permutation
+    if (canUp == 0){
+        reverse(nums.begin(), nums.end());
+        return;
+    }
+
+    // find the smallest bigger number on the right of canUp, and swap with it
+    int smallest = lenS - 1;
+
+    while (smallest > canUp && nums[smallest] <= nums[canUp-1]){
+        smallest--;
+    }
+    swap(nums[canUp-1], nums[smallest]);
+
+    reverse(nums.begin()+canUp, nums.end());
+}
