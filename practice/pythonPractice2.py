@@ -323,3 +323,31 @@ def intToRoman(self, num: int) -> str:
         num = num - repeat*value
 
     return ''.join(result)
+
+#countAndSay(1) = "1"
+#countAndSay(n) is the run-length encoding of countAndSay(n - 1).
+#Run-length encoding (RLE) is a string compression method that works by replacing consecutive identical characters (repeated 2 or more times) with the concatenation of the character and the number marking the count of the characters (length of the run). For example, to compress the string "3322251" we replace "33" with "23", replace "222" with "32", replace "5" with "15" and replace "1" with "11". Thus the compressed string becomes "23321511".
+
+def countAndSay(self, n: int) -> str:
+
+    def rle(strIn: str):
+        result = ""
+
+        count = 0
+        for i, ch in enumerate(strIn):
+            if i == 0:
+                count = 1
+                continue
+            if ch == strIn[i-1]:
+                count += 1
+            else:
+                result += str(count) + str(strIn[i-1])
+                count = 1
+        
+        result += str(count) + str(strIn[-1])
+        return result
+
+    if n == 1:
+        return "1"
+    else:
+        return rle(self.countAndSay(n-1))
