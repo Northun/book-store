@@ -404,6 +404,40 @@ string intToRoman(int num) {
         //result += s;
         //num = num - repeat*value;
     }
+
+
+//count to say
+string countAndSay(int n) {
+
+
+    if (n == 1)
+        return "1";
+    else
+        return rle(countAndSay(n-1));
+}
+
+string rle(string strIn){
+    string result {};
+
+    int count = 0;
+    int i {0};
+    for (char ch: strIn){
+        if (i == 0){
+            i++;
+            count = 1;
+            continue;
+        }
+        if (ch == strIn[i-1])
+            count++;
+        else{
+            result = result + to_string(count) + strIn[i-1];
+            count = 1;
+        }
+        i++;
+    }
     
+    result = result + to_string(count) + strIn.back();
     return result;
+}
+  return result;
 }
