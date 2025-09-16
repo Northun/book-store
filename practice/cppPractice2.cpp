@@ -441,3 +441,28 @@ string rle(string strIn){
 }
   return result;
 }
+
+
+//jump game
+//Input: nums = [2,3,1,1,4]
+//Output: 2
+//Explanation: The minimum number of jumps to reach the last index is 2. Jump 1 step from index 0 to 1, then 3 steps to the last index.
+
+     
+int jump(vector<int>& nums) {
+     
+    int near = 0;
+    int far = 0;
+    int jumps = 0;
+
+    while (far < nums.size() - 1){
+        int farthest = 0;
+        for (int i = near; i < far+1;i++){
+            farthest = max(farthest, i + nums[i]);
+        }
+        near = far + 1;
+        far = farthest;
+        jumps++;
+    }
+    return jumps;
+}
